@@ -263,7 +263,8 @@
                 'option.bad': 'Bad/unrecognized option was given or unexpected option argument was given.',
                 'server.overload': 'The remote server was unable to handle the request due to a temporary overloading or maintenance.',
                 'rpc.request.parse.failed': 'Failed to parse JSON-RPC request.',
-                'checksum.failed': 'Checksum validation failed.'
+                'checksum.failed': 'Checksum validation failed.',
+                'file.deleted': 'File has been moved or deleted'
             },
             'format': {
                 'longdate': 'MM/DD/YYYY HH:mm:ss',

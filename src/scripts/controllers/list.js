@@ -99,6 +99,15 @@
             return rpcHost === "127.0.0.1" || rpcHost === "localhost" || rpcHost === "::1"
         }
 
+        $scope.file_exists = function (path) {
+            if (window.file_exists) {
+                return window.file_exists(path) ? true : 'deleted'
+            }
+            else{
+                return true
+            }
+        }
+
         if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 refreshDownloadTask(true);
