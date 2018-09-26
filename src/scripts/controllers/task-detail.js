@@ -470,6 +470,20 @@
             }
         }
 
+        $scope.is_localhost = function () {
+            var rpcHost = ariaNgSettingService.getAllRpcSettings()[0].rpcHost
+            return rpcHost === "127.0.0.1" || rpcHost === "localhost" || rpcHost === "::1"
+        }
+
+        $scope.dir_exists = function (dir) {
+            if (window.file_exists) {
+                return window.file_exists(dir)
+            }
+            else {
+                return false
+            }
+        }
+
         if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 if ($scope.task && ($scope.task.status === 'complete' || $scope.task.status === 'error' || $scope.task.status === 'removed')) {

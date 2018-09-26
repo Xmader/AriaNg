@@ -103,8 +103,8 @@
             if (window.file_exists) {
                 return window.file_exists(path) ? true : 'deleted'
             }
-            else{
-                return true
+            else {
+                return false
             }
         }
 
