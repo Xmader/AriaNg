@@ -40,8 +40,14 @@
                     <div class="checkbox checkbox-primary" ng-class="{'checkbox-hide': !taskContext.selected[task.gid]}">
                         <input id="{{'task_' + task.gid}}" type="checkbox" ng-model="taskContext.selected[task.gid]"/>
                         <label for="{{'task_' + task.gid}}">
-                            <span class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{task.taskName}}"></span>
+                            <a ng-if="task.status === 'complete'">
+                                <span class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{'点击在文件管理器中显示文件'}}"></span>
+                            </a>
+                            <span ng-if="task.status !== 'complete'" class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{task.taskName}}"></span>
                         </label>
+                        <!-- <a ng-if="task.status === 'complete'" style="position: relative; top: 0.2em; left: 3em; color: #707070;">
+                            <i class="fa fa-folder-open-o" title="{{'在文件管理器中显示文件'}}"></i>
+                        </a> -->
                     </div>
                     <div class="task-files">
                         <span ng-bind="task.totalLength | readableVolume"></span>

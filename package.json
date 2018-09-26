@@ -5,7 +5,7 @@
     },
     "name": "ariang",
     "description": "AriaNg, a modern web frontend making aria2 easier to use.",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "main": "index.html",
     "repository": {
         "type": "git",
