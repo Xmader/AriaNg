@@ -160,6 +160,8 @@
             }
         };
 
+        window.aria2TaskService = aria2TaskService
+
         $rootScope.swipeActions = {
             leftSwipe: function () {
                 if (isSidebarShowInSmallScreen()) {
