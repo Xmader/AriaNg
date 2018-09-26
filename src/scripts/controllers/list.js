@@ -94,6 +94,11 @@
             }
         }
 
+        $scope.is_localhost = function () {
+            var rpcHost = ariaNgSettingService.getAllRpcSettings()[0].rpcHost
+            return rpcHost === "127.0.0.1" || rpcHost === "localhost" || rpcHost === "::1"
+        }
+
         if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 refreshDownloadTask(true);

@@ -39,11 +39,11 @@
                 <div class="col-md-8 col-sm-7 col-xs-12">
                     <div class="checkbox checkbox-primary" ng-class="{'checkbox-hide': !taskContext.selected[task.gid]}">
                         <input id="{{'task_' + task.gid}}" type="checkbox" ng-model="taskContext.selected[task.gid]"/>
-                        <label for="{{'task_' + task.gid}}">
-                            <a ng-if="task.status === 'complete'" ng-click="show_file(task.files[0].path)">
+                        <label for="{{'task_' + task.gid}}" ng-switch="task.status === 'complete' && is_localhost(task)">
+                            <a ng-switch-when="true" ng-click="show_file(task.files[0].path)">
                                 <span class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{'Show the file in a file manager' | translate}}"></span>
                             </a>
-                            <span ng-if="task.status !== 'complete'" class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{task.taskName}}"></span>
+                            <span ng-switch-when="false" class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{task.taskName}}"></span>
                         </label>
                     </div>
                     <div class="task-files">
