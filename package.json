@@ -4,12 +4,12 @@
         "node": ">=6"
     },
     "name": "ariang",
-    "description": "AriaNg, a modern web frontend making aria2 easier to use.",
-    "version": "0.6.2",
+    "description": "适用于AriaNg GUI的AriaNg, 为 AriaNg GUI 加强功能",
+    "version": "0.6.3",
     "main": "index.html",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/mayswind/AriaNg.git"
+        "url": "git+https://github.com/Xmader/AriaNg.git"
     },
     "keywords": [
         "aria2",
@@ -18,10 +18,13 @@
         "UI"
     ],
     "author": "MaysWind <i@mayswind.net>",
+    "contributors": [
+        "MaysWind",
+        "Xmader"
+    ],
     "bugs": {
-        "url": "https://github.com/mayswind/AriaNg/issues"
+        "url": "https://github.com/Xmader/AriaNg/issues"
     },
-    "homepage": "http://ariang.mayswind.net/",
     "scripts": {
         "build": "gulp clean build",
         "dev": "npm run build && http-server ./dist --silent"

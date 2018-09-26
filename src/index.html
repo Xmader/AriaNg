@@ -11,10 +11,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="msapplication-TileColor" content="#3c4852">
     <meta name="msapplication-TileImage" content="tileicon.png">
-    <meta name="description" content="AriaNg, a modern web frontend making aria2 easier to use.">
+    <meta name="description" content="适用于AriaNg GUI的AriaNg, 为 AriaNg GUI 加强功能">
     <meta name="theme-color" content="#3c4852">
     <meta name="format-detection" content="telephone=no"/>
-    <title>AriaNg</title>
+    <title>AriaNg GUI</title>
     <link rel="icon" href="favicon.png">
     <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
     <link rel="apple-touch-icon" href="touchicon.png">
@@ -49,11 +49,11 @@
 <div class="wrapper" ng-controller="MainController" ng-swipe-left="swipeActions.leftSwipe()" ng-swipe-right="swipeActions.rightSwipe()" ng-swipe-disable-mouse>
     <header class="main-header">
         <div class="logo">
-            <div class="logo-mini">AriaNg</div>
-            <div class="logo-lg" title="AriaNg %%GULP_INJECT_VERSION%%">
+            <div class="logo-mini">AriaNg GUI</div>
+            <div class="logo-lg" id="aria-ng-logo" title="AriaNg %%GULP_INJECT_VERSION%%">
                 <div class="dropdown">
                     <span class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="logo-lg-title">AriaNg</span><i class="fa fa-caret-right fa-right-bottom fa-rotate-45 fa-half" aria-hidden="true"></i>
+                        <span class="logo-lg-title">AriaNg GUI</span><i class="fa fa-caret-right fa-right-bottom fa-rotate-45 fa-half" aria-hidden="true"></i>
                     </span>
                     <ul class="dropdown-menu dropdown-menu-right rpcselect-dropdown" role="menu">
                         <li ng-repeat="setting in rpcSettings" ng-class="{'active': setting.isDefault}">
