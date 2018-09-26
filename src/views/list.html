@@ -41,7 +41,7 @@
                         <input id="{{'task_' + task.gid}}" type="checkbox" ng-model="taskContext.selected[task.gid]"/>
                         <label for="{{'task_' + task.gid}}">
                             <a ng-if="task.status === 'complete'" ng-click="show_file(task.files[0].path)">
-                                <span class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{'在文件管理器中显示文件'}}"></span>
+                                <span class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{'Show the file in a file manager' | translate}}"></span>
                             </a>
                             <span ng-if="task.status !== 'complete'" class="task-name auto-ellipsis" ng-bind="task.taskName" title="{{task.taskName}}"></span>
                         </label>

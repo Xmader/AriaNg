@@ -227,6 +227,7 @@ Tap to configure and get started with AriaNg.=您还没有进行过设置, 点�
 Cannot initialize WebSocket!=无法初始化 WebSocket!
 Access Denied!=拒绝访问!
 You cannot use AriaNg because this browser does not support data storage.=您无法使用 AriaNg, 您的浏览器不支持数据存储.
+Show the file in a file manager=在文件管理器中显示文件
 
 [error]
 unknown=未知错误.

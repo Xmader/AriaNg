@@ -232,6 +232,7 @@
             'Cannot initialize WebSocket!': 'Cannot initialize WebSocket!',
             'Access Denied!': 'Access Denied!',
             'You cannot use AriaNg because this browser does not support data storage.': 'You cannot use AriaNg because this browser does not support data storage.',
+            'Show the file in a file manager': 'Show the file in a file manager',
             'error': {
                 'unknown': 'Unknown error occurred.',
                 'operation.timeout': 'Operation timed out.',
