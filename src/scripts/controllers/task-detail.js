@@ -464,8 +464,8 @@
             clipboard.copyText(info);
         };
 
-        $scope.open_download_dir = function(dir) {
-            if(window.open_download_dir){
+        $scope.open_download_dir = function (dir) {
+            if (window.open_download_dir) {
                 window.open_download_dir(dir)
             }
         }

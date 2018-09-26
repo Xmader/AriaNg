@@ -88,6 +88,12 @@
             return location === 'waiting' && displayOrder.type === 'default';
         };
 
+        $scope.show_file = function (path) {
+            if (window.show_file) {
+                window.show_file(path)
+            }
+        }
+
         if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 refreshDownloadTask(true);
