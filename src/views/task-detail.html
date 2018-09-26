@@ -138,7 +138,9 @@
                             <span translate>Download Dir</span>
                         </div>
                         <div class="setting-value col-sm-8">
-                            <span class="allow-word-break" ng-bind="task.dir"></span>
+                            <a ng-click="open_download_dir(task.dir)" ng-href="#!/task/detail/{{task.gid}}">
+                                <span class="allow-word-break" ng-bind="task.dir"></span>
+                            </a>
                         </div>
                     </div>
                     <div class="row" ng-if="task && task.bittorrent && task.bittorrent.announceList && task.bittorrent.announceList.length > 0">

@@ -464,6 +464,12 @@
             clipboard.copyText(info);
         };
 
+        $scope.open_download_dir = function(dir) {
+            if(window.open_download_dir){
+                window.open_download_dir(dir)
+            }
+        }
+
         if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 if ($scope.task && ($scope.task.status === 'complete' || $scope.task.status === 'error' || $scope.task.status === 'removed')) {
