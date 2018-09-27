@@ -173,7 +173,7 @@
             'Invalid settings data format!': 'Invalid settings data format!',
             'Data has been copied to clipboard.': 'Data has been copied to clipboard.',
             'Supported Placeholder': 'Supported Placeholder',
-            'AriaNg Title': 'AriaNg Title',
+            'AriaNg Title': 'AriaNg GUI Title',
             'Downloading Count': 'Downloading Count',
             'Waiting Count': 'Waiting Count',
             'Stopped Count': 'Stopped Count',

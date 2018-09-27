@@ -82,6 +82,10 @@
 
                 if (isSupportBrowserNotification && ariaNgSettingService.getBrowserNotification()) {
                     showBrowserNotifaction(title, options);
+
+                    if (window.notify) {
+                        window.notify(title, content);
+                    }    
                 }
             },
             notifyInPage: function (title, content, options) {
