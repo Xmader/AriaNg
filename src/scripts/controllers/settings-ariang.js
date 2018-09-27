@@ -296,6 +296,10 @@
             });
         };
 
+        $scope.isSupportDesktopNotification = function () {
+            return typeof window.notify === "function"
+        };
+
         angular.element('[data-toggle="popover"]').popover();
 
         $rootScope.loadPromise = $timeout(function () {}, 100);

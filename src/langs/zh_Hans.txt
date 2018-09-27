@@ -136,6 +136,7 @@ Tips: You can use the "noprefix" tag to ignore the prefix, "nosuffix" tag ignore
 Example: ${downspeed:noprefix:nosuffix:scale\=1}=示例: ${downspeed:noprefix:nosuffix:scale\=1}
 Page Title Refresh Interval=页面标题刷新间隔
 Enable Browser Notification=启用浏览器通知
+Enable Desktop Notification=启用桌面通知
 Aria2 RPC Alias=Aria2 RPC 别名
 Aria2 RPC Address=Aria2 RPC 地址
 Aria2 RPC Protocol=Aria2 RPC 协议

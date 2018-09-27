@@ -81,11 +81,12 @@
                 options.body = content;
 
                 if (isSupportBrowserNotification && ariaNgSettingService.getBrowserNotification()) {
-                    showBrowserNotifaction(title, options);
-
                     if (window.notify) {
                         window.notify(title, content);
-                    }    
+                    }
+                    else {
+                        showBrowserNotifaction(title, options);
+                    }
                 }
             },
             notifyInPage: function (title, content, options) {

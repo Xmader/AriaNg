@@ -65,8 +65,9 @@
                         </div>
                     </div>
                     <div class="row" ng-if="isSupportNotification()">
-                        <div class="setting-key setting-key-without-desc col-sm-4">
-                            <span translate>Enable Browser Notification</span>
+                        <div class="setting-key setting-key-without-desc col-sm-4" ng-switch="isSupportDesktopNotification()">
+                            <span translate ng-switch-when="true">Enable Desktop Notification</span>
+                            <span translate ng-switch-when="false">Enable Browser Notification</span>
                         </div>
                         <div class="setting-value col-sm-8">
                             <select class="form-control" style="width: 100%;"

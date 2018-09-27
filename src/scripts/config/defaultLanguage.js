@@ -140,6 +140,7 @@
             'Example: ${downspeed:noprefix:nosuffix:scale=1}': 'Example: ${downspeed:noprefix:nosuffix:scale=1}',
             'Page Title Refresh Interval': 'Page Title Refresh Interval',
             'Enable Browser Notification': 'Enable Browser Notification',
+            'Enable Desktop Notification': 'Enable Desktop Notification',
             'Aria2 RPC Alias': 'Aria2 RPC Alias',
             'Aria2 RPC Address': 'Aria2 RPC Address',
             'Aria2 RPC Protocol': 'Aria2 RPC Protocol',
