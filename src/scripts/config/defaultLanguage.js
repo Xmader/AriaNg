@@ -141,6 +141,7 @@
             'Page Title Refresh Interval': 'Page Title Refresh Interval',
             'Enable Browser Notification': 'Enable Browser Notification',
             'Enable Desktop Notification': 'Enable Desktop Notification',
+            'Enable Minimize Notification': 'Enable Minimize Notification',
             'Aria2 RPC Alias': 'Aria2 RPC Alias',
             'Aria2 RPC Address': 'Aria2 RPC Address',
             'Aria2 RPC Protocol': 'Aria2 RPC Protocol',

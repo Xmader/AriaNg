@@ -145,6 +145,11 @@
             }
         };
 
+        $scope.setEnableMinimizeNotification = function (value) {
+            setNeedRefreshPage();
+            ariaNgSettingService.setEnableMinimizeNotification(value);
+        };
+
         $scope.setTitleRefreshInterval = function (value) {
             setNeedRefreshPage();
             ariaNgSettingService.setTitleRefreshInterval(value);

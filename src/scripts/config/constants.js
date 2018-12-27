@@ -25,6 +25,7 @@
         title: '${downspeed}, ${upspeed} - ${title}',
         titleRefreshInterval: 5000,
         browserNotification: true,
+        minimizeNotification: true,
         rpcAlias: '',
         rpcHost: '',
         rpcPort: '6800',
