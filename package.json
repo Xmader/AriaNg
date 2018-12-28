@@ -3,9 +3,9 @@
     "engines": {
         "node": ">=6"
     },
-    "name": "ariang",
+    "name": "@xmader/ariang",
     "description": "适用于AriaNg GUI的AriaNg, 为 AriaNg GUI 加强功能",
-    "version": "0.6.10",
+    "version": "1.0.0",
     "main": "index.html",
     "repository": {
         "type": "git",

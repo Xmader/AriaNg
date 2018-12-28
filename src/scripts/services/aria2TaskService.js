@@ -614,7 +614,7 @@
                     callback: callback
                 });
             },
-            restartTask: function (gid, callback, silent) {
+            retryTask: function (gid, callback, silent) {
                 var deferred = $q.defer();
 
                 var methods = [
@@ -629,12 +629,12 @@
                     silent: !!silent,
                     callback: function (response) {
                         if (!callback) {
-                            ariaNgLogService.warn('[aria2TaskService.restartTask] callback is null');
+                            ariaNgLogService.warn('[aria2TaskService.retryTask] callback is null');
                             return;
                         }
 
                         if (!response.success) {
-                            ariaNgLogService.warn('[aria2TaskService.restartTask] response is not success', response);
+                            ariaNgLogService.warn('[aria2TaskService.retryTask] response is not success', response);
                             deferred.reject(response);
                             callback(response);
                             return;
@@ -650,23 +650,23 @@
 
                         if (!task || !options || !task.files || task.files.length !== 1 || task.bittorrent) {
                             if (!task) {
-                                ariaNgLogService.warn('[aria2TaskService.restartTask] task is null');
+                                ariaNgLogService.warn('[aria2TaskService.retryTask] task is null');
                             }
 
                             if (!options) {
-                                ariaNgLogService.warn('[aria2TaskService.restartTask] options is null');
+                                ariaNgLogService.warn('[aria2TaskService.retryTask] options is null');
                             }
 
                             if (!task.files) {
-                                ariaNgLogService.warn('[aria2TaskService.restartTask] task file is null');
+                                ariaNgLogService.warn('[aria2TaskService.retryTask] task file is null');
                             }
 
                             if (task.files.length !== 1) {
-                                ariaNgLogService.warn('[aria2TaskService.restartTask] task file length is not equal 1');
+                                ariaNgLogService.warn('[aria2TaskService.retryTask] task file length is not equal 1');
                             }
 
                             if (task.bittorrent) {
-                                ariaNgLogService.warn('[aria2TaskService.restartTask] task is bittorrent');
+                                ariaNgLogService.warn('[aria2TaskService.retryTask] task is bittorrent');
                             }
 
                             deferred.reject(gid);
@@ -693,19 +693,19 @@
                             silent: !!silent,
                             callback: function (response) {
                                 if (!response.success) {
-                                    ariaNgLogService.warn('[aria2TaskService.restartTask] addUri response is not success', response);
+                                    ariaNgLogService.warn('[aria2TaskService.retryTask] addUri response is not success', response);
                                     deferred.reject(response);
                                     callback(response);
                                     return;
                                 }
 
-                                if (ariaNgSettingService.getRemoveOldTaskAfterRestarting()) {
+                                if (ariaNgSettingService.getRemoveOldTaskAfterRetrying()) {
                                     aria2RpcService.removeDownloadResult({
                                         gid: gid,
                                         silent: true,
                                         callback: function (response) {
                                             if (!response.success) {
-                                                ariaNgLogService.warn('[aria2TaskService.restartTask] removeDownloadResult response is not success', response);
+                                                ariaNgLogService.warn('[aria2TaskService.retryTask] removeDownloadResult response is not success', response);
                                             }
                                         }
                                     });
@@ -717,6 +717,63 @@
                         });
                     }
                 });
+
+                return deferred.promise;
+            },
+            retryTasks: function (tasks, callback, silent) {
+                if (!callback) {
+                    ariaNgLogService.warn('[aria2TaskService.retryTasks] callback is null');
+                    return;
+                }
+
+                var retryTaskFunc = this.retryTask;
+
+                var deferred = $q.defer();
+                var lastPromise = null;
+
+                var successCount = 0;
+                var failedCount = 0;
+
+                var doRetryFunc = function (task, index) {
+                    return retryTaskFunc(task.gid, function (response) {
+                        ariaNgLogService.debug('[aria2TaskService.retryTasks] task#' + index + ', gid=' + task.gid + ', result=' + response.success, task);
+
+                        if (response.success) {
+                            successCount++;
+                        } else {
+                            failedCount++;
+                        }
+
+                        if ((successCount + failedCount) === tasks.length) {
+                            var finalResponse = {
+                                successCount: successCount,
+                                failedCount: failedCount,
+                                hasSuccess: successCount > 0,
+                                hasError: failedCount > 0
+                            };
+
+                            deferred.resolve(finalResponse);
+                            callback(finalResponse);
+                        }
+                    }, silent);
+                };
+
+                for (var i = 0; i < tasks.length; i++) {
+                    var task = tasks[i];
+                    var currentPromise = null;
+
+                    if (!lastPromise) {
+                        currentPromise = doRetryFunc(task, i);
+                    } else {
+                        currentPromise = (function (task, index) {
+                            return lastPromise.then(function () {
+                                return doRetryFunc(task, index);
+                            });
+                        })(task, i);
+                    }
+
+                    lastPromise = currentPromise;
+                }
 
                 return deferred.promise;
             },
@@ -797,23 +854,23 @@
                     callback: callback
                 });
             },
-            onConnectSuccess: function (callback) {
+            onOperationSuccess: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onConnectSuccess] callback is null');
+                    ariaNgLogService.warn('[aria2TaskService.onOperationSuccess] callback is null');
                     return;
                 }
 
-                aria2RpcService.onConnectSuccess({
+                aria2RpcService.onOperationSuccess({
                     callback: callback
                 });
             },
-            onConnectError: function (callback) {
+            onOperationError: function (callback) {
                 if (!callback) {
-                    ariaNgLogService.warn('[aria2TaskService.onConnectError] callback is null');
+                    ariaNgLogService.warn('[aria2TaskService.onOperationError] callback is null');
                     return;
                 }
 
-                aria2RpcService.onConnectError({
+                aria2RpcService.onOperationError({
                     callback: callback
                 });
 

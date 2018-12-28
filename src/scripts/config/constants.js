@@ -38,7 +38,8 @@
         downloadTaskRefreshInterval: 1000,
         rpcListDisplayOrder: 'recentlyUsed',
         afterCreatingNewTask: 'task-list',
-        removeOldTaskAfterRestarting: false,
+        removeOldTaskAfterRetrying: false,
+        afterRetryingTask: 'task-list-downloading',
         displayOrder: 'default:asc',
         fileListDisplayOrder: 'default:asc',
         peerListDisplayOrder: 'default:asc'

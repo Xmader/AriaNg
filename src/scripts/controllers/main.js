@@ -138,25 +138,102 @@
             }, (gids.length > 1));
         };
 
-        $scope.restart = function (task) {
-            ariaNgLocalizationService.confirm('Confirm Restart', 'Are you sure you want to restart this task? AriaNg will create a same task after clicking OK.', 'info', function () {
-                $rootScope.loadPromise = aria2TaskService.restartTask(task.gid, function (response) {
+        $scope.retryTask = function (task) {
+            ariaNgLocalizationService.confirm('Confirm Retry', 'Are you sure you want to retry the selected task? AriaNg will create same task after clicking OK.', 'info', function () {
+                $rootScope.loadPromise = aria2TaskService.retryTask(task.gid, function (response) {
                     if (!response.success) {
-                        ariaNgLocalizationService.showError('Failed to restart this task.');
+                        ariaNgLocalizationService.showError('Failed to retry this task.');
                         return;
                     }
 
                     refreshGlobalStat(true);
 
-                    if (response.success) {
-                        if ($location.path() !== '/downloading') {
-                            $location.path('/downloading');
+                    var actionAfterRetryingTask = ariaNgSettingService.getAfterRetryingTask();
+
+                    if (response.success && response.data) {
+                        if (actionAfterRetryingTask === 'task-list-downloading') {
+                            if ($location.path() !== '/downloading') {
+                                $location.path('/downloading');
+                            } else {
+                                $route.reload();
+                            }
+                        } else if (actionAfterRetryingTask === 'task-detail') {
+                            $location.path('/task/detail/' + response.data);
                         } else {
                             $route.reload();
                         }
                     }
                 }, false);
             });
+        };
+
+        $scope.isTaskRetryable = function (task) {
+            return task && task.status === 'error' && task.errorDescription && !task.bittorrent;
+        };
+
+        $scope.isSelectedTaskRetryable = function () {
+            var selectedTasks = $rootScope.taskContext.getSelectedTasks();
+
+            if (selectedTasks.length < 1) {
+                return false;
+            }
+
+            for (var i = 0; i < selectedTasks.length; i++) {
+                if (!$scope.isTaskRetryable(selectedTasks[i])) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        $scope.retryTasks = function () {
+            var tasks = $rootScope.taskContext.getSelectedTasks();
+
+            if (!tasks || tasks.length < 1) {
+                return;
+            } else if (tasks.length === 1) {
+                return $scope.retryTask(tasks[0]);
+            }
+
+            var retryableTasks = [];
+            var skipCount = 0;
+
+            for (var i = 0; i < tasks.length; i++) {
+                if ($scope.isTaskRetryable(tasks[i])) {
+                    retryableTasks.push(tasks[i]);
+                } else {
+                    skipCount++;
+                }
+            }
+
+            ariaNgLocalizationService.confirm('Confirm Retry', 'Are you sure you want to retry the selected task? AriaNg will create same task after clicking OK.', 'info', function () {
+                $rootScope.loadPromise = aria2TaskService.retryTasks(retryableTasks, function (response) {
+                    refreshGlobalStat(true);
+
+                    ariaNgLocalizationService.showInfo('Operation Result', '{{successCount}} tasks have been retried and {{failedCount}} tasks are failed.', function () {
+                        var actionAfterRetryingTask = ariaNgSettingService.getAfterRetryingTask();
+
+                        if (response.hasSuccess) {
+                            if (actionAfterRetryingTask === 'task-list-downloading') {
+                                if ($location.path() !== '/downloading') {
+                                    $location.path('/downloading');
+                                } else {
+                                    $route.reload();
+                                }
+                            } else {
+                                $route.reload();
+                            }
+                        }
+                    }, {
+                        textParams: {
+                            successCount: response.successCount,
+                            failedCount: response.failedCount,
+                            skipCount: skipCount
+                        }
+                    });
+                }, false);
+            }, true);
         };
 
         $scope.removeTasks = function () {
@@ -205,6 +282,10 @@
                     }
                 });
             });
+        };
+
+        $scope.isAllTasksSelected = function () {
+            return $rootScope.taskContext.isAllSelected();
         };
 
         $scope.selectAllTasks = function () {
