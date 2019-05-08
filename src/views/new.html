@@ -8,6 +8,9 @@
                 <li ng-class="{'active': context.currentTab === 'options'}">
                     <a class="pointer-cursor" ng-click="changeTab('options')" translate>Options</a>
                 </li>
+                <li ng-class="{'active': context.currentTab === 'filelist'}" ng-if="context.taskType === 'torrent' && context.uploadFile">
+                    <a class="pointer-cursor" ng-click="changeTab('filelist')" translate>Files</a>
+                </li>
                 <li class="divider"></li>
                 <li class="nav-toolbar">
                     <div class="btn-group">
@@ -87,6 +90,23 @@
                         <ng-setting ng-repeat="option in context.availableOptions" ng-if="context.optionFilter[option.category]"
                                     option="option" lazy-save-timeout="0" default-value="context.globalOptions[option.key]"
                                     on-change-value="setOption(key, value, optionStatus)"></ng-setting>
+                    </div>
+                </div>
+                <div class="tab-pane" ng-class="{'active': context.currentTab === 'filelist'}">
+                    <div class="task-table">
+                        <div class="task-table-title">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <a ng-click="changeFileListDisplayOrder('name:asc', true)" ng-class="{true: 'default-cursor'}[fileList.multiDir]" translate>File Name</a>
+                                    <i ng-if="!fileList.multiDir" class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetFileListDisplayOrder('name:asc'), 'fa-sort-desc fa-order-desc': isSetFileListDisplayOrder('name:desc')}"></i>
+                                    <a ng-click="showChooseFilesToolbar()" ng-if="fileList && fileList.files && fileList.files.length > 1" translate>(Choose Files)</a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a ng-click="changeFileListDisplayOrder('size:asc', true)" ng-class="{true: 'default-cursor'}[fileList.multiDir]" translate>File Size</a>
+                                    <i ng-if="!fileList.multiDir" class="fa" ng-class="{'fa-sort-asc fa-order-asc': isSetFileListDisplayOrder('size:asc'), 'fa-sort-desc fa-order-desc': isSetFileListDisplayOrder('size:desc')}"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

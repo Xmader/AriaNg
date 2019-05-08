@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('ariaNg').controller('NewTaskController', ['$rootScope', '$scope', '$location', '$timeout', 'ariaNgCommonService', 'ariaNgLocalizationService', 'ariaNgLogService', 'ariaNgFileService', 'ariaNgSettingService', 'aria2TaskService', 'aria2SettingService', function ($rootScope, $scope, $location, $timeout, ariaNgCommonService, ariaNgLocalizationService, ariaNgLogService, ariaNgFileService, ariaNgSettingService, aria2TaskService, aria2SettingService) {
-        var tabOrders = ['links', 'options'];
+        var tabOrders = ['links', 'options', 'filelist'];
         var parameters = $location.search();
 
         var saveDownloadPath = function (options) {
@@ -88,6 +88,12 @@
         $scope.changeTab = function (tabName) {
             if (tabName === 'options') {
                 $scope.loadDefaultOption();
+            } else if (tabName === 'filelist') {
+                if (!$scope.fileList) {
+                    var torrent = ariaNgFileService.createUint8ArrayFromBase64($scope.context.uploadFile.base64Content)
+                    var result = ariaNgFileService.getFilesInTorrent(torrent)
+                    $scope.fileList = result
+                }
             }
 
             $scope.context.currentTab = tabName;
@@ -134,6 +140,7 @@
             }, function (result) {
                 $scope.context.uploadFile = result;
                 $scope.context.taskType = 'torrent';
+                $scope.fileList = null
                 $scope.changeTab('options');
             }, function (error) {
                 ariaNgLocalizationService.showError(error);
@@ -208,6 +215,31 @@
             return urls ? urls.length : 0;
         };
 
-        $rootScope.loadPromise = $timeout(function () {}, 100);
+        $scope.changeFileListDisplayOrder = function (type, autoSetReverse) {
+            console.log($scope.context.uploadFile)
+            console.log($scope.fileList)
+
+            if ($scope.fileList && $scope.fileList.multiDir) {
+                return;
+            }
+
+            var oldType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getFileListDisplayOrder());
+            var newType = ariaNgCommonService.parseOrderType(type);
+
+            if (autoSetReverse && newType.type === oldType.type) {
+                newType.reverse = !oldType.reverse;
+            }
+
+            ariaNgSettingService.setFileListDisplayOrder(newType.getValue());
+        };
+
+        $scope.isSetFileListDisplayOrder = function (type) {
+            var orderType = ariaNgCommonService.parseOrderType(ariaNgSettingService.getFileListDisplayOrder());
+            var targetType = ariaNgCommonService.parseOrderType(type);
+
+            return orderType.equals(targetType);
+        };
+
+        $rootScope.loadPromise = $timeout(function () { }, 100);
     }]);
 }());
