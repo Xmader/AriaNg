@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('ariaNg').constant('ariaNgConstants', {
-        title: 'AriaNg',
+        title: 'AriaNg GUI',
         appPrefix: 'AriaNg',
         optionStorageKey: 'Options',
         languageStorageKeyPrefix: 'Language',
@@ -25,12 +25,13 @@
         language: 'en',
         title: '${downspeed}, ${upspeed} - ${title}',
         titleRefreshInterval: 5000,
-        browserNotification: false,
+        browserNotification: true,
+        minimizeNotification: true,
         rpcAlias: '',
         rpcHost: '',
         rpcPort: '6800',
         rpcInterface: 'jsonrpc',
-        protocol: 'http',
+        protocol: 'ws',
         httpMethod: 'POST',
         secret: '',
         extendRpcServers: [],

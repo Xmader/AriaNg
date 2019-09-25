@@ -304,6 +304,8 @@
             return task && task.status === 'error' && task.errorDescription && !task.bittorrent;
         };
 
+        window.aria2TaskService = aria2TaskService
+
         $rootScope.swipeActions = {
             leftSwipe: function () {
                 if (isSidebarShowInSmallScreen()) {

@@ -345,6 +345,12 @@
             setBrowserNotification: function (value) {
                 setOption('browserNotification', value);
             },
+            getEnableMinimizeNotification: function () {
+                return getOption('minimizeNotification');
+            },
+            setEnableMinimizeNotification: function (value) {
+                setOption('minimizeNotification', value);
+            },
             getTitleRefreshInterval: function () {
                 return getOption('titleRefreshInterval');
             },

@@ -84,6 +84,26 @@
             return location === 'waiting' && displayOrder.type === 'default';
         };
 
+        $scope.show_file = function (path) {
+            if (window.show_file) {
+                window.show_file(path)
+            }
+        }
+
+        $scope.is_localhost = function () {
+            var rpcHost = ariaNgSettingService.getAllRpcSettings()[0].rpcHost
+            return rpcHost === "127.0.0.1" || rpcHost === "localhost" || rpcHost === "::1"
+        }
+
+        $scope.file_exists = function (path) {
+            if (window.file_exists) {
+                return window.file_exists(path) ? true : 'deleted'
+            }
+            else {
+                return false
+            }
+        }
+
         if (ariaNgSettingService.getDownloadTaskRefreshInterval() > 0) {
             downloadTaskRefreshPromise = $interval(function () {
                 refreshDownloadTask(true);

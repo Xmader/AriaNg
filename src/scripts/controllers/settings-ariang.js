@@ -166,6 +166,11 @@
             }
         };
 
+        $scope.setEnableMinimizeNotification = function (value) {
+            setNeedRefreshPage();
+            ariaNgSettingService.setEnableMinimizeNotification(value);
+        };
+
         $scope.setTitleRefreshInterval = function (value) {
             setNeedRefreshPage();
             ariaNgSettingService.setTitleRefreshInterval(value);
@@ -322,6 +327,10 @@
                 aria2SettingService.clearSettingsHistorys();
                 $window.location.reload();
             });
+        };
+
+        $scope.isSupportDesktopNotification = function () {
+            return typeof window.notify === "function"
         };
 
         angular.element('[data-toggle="popover"]').popover();

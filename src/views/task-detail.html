@@ -137,8 +137,11 @@
                         <div class="setting-key col-sm-4">
                             <span translate>Download Dir</span>
                         </div>
-                        <div class="setting-value col-sm-8">
-                            <span class="allow-word-break" ng-bind="task.dir"></span>
+                        <div class="setting-value col-sm-8" ng-switch="is_localhost() && dir_exists(task.dir)">
+                            <a ng-switch-when="true" ng-click="open_download_dir(task.dir)" ng-href="#!/task/detail/{{task.gid}}">
+                                <span class="allow-word-break" ng-bind="task.dir"></span>
+                            </a>
+                            <span ng-switch-when="false" class="allow-word-break" ng-bind="task.dir"></span>
                         </div>
                     </div>
                     <div class="row" ng-if="task && task.bittorrent && task.bittorrent.announceList && task.bittorrent.announceList.length > 0">

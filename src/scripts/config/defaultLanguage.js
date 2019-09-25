@@ -158,6 +158,8 @@
             'Example: ${downspeed:noprefix:nosuffix:scale=1}': 'Example: ${downspeed:noprefix:nosuffix:scale=1}',
             'Updating Page Title Interval': 'Updating Page Title Interval',
             'Enable Browser Notification': 'Enable Browser Notification',
+            'Enable Desktop Notification': 'Enable Desktop Notification',
+            'Enable Minimize Notification': 'Enable Minimize Notification',
             'Aria2 RPC Alias': 'Aria2 RPC Alias',
             'Aria2 RPC Address': 'Aria2 RPC Address',
             'Aria2 RPC Protocol': 'Aria2 RPC Protocol',
@@ -194,7 +196,7 @@
             'Invalid settings data format!': 'Invalid settings data format!',
             'Data has been copied to clipboard.': 'Data has been copied to clipboard.',
             'Supported Placeholder': 'Supported Placeholder',
-            'AriaNg Title': 'AriaNg Title',
+            'AriaNg Title': 'AriaNg GUI Title',
             'Current RPC Alias': 'Current RPC Alias',
             'Downloading Count': 'Downloading Count',
             'Waiting Count': 'Waiting Count',
@@ -256,6 +258,7 @@
             'Cannot initialize WebSocket!': 'Cannot initialize WebSocket!',
             'Access Denied!': 'Access Denied!',
             'You cannot use AriaNg because this browser does not meet the minimum requirements for data storage.': 'You cannot use AriaNg because this browser does not meet the minimum requirements for data storage.',
+            'Show the file in a file manager': 'Show the file in a file manager',
             'error': {
                 'unknown': 'Unknown error occurred.',
                 'operation.timeout': 'Operation timed out.',
@@ -286,7 +289,8 @@
                 'option.bad': 'Bad/unrecognized option was given or unexpected option argument was given.',
                 'server.overload': 'The remote server was unable to handle the request due to a temporary overloading or maintenance.',
                 'rpc.request.parse.failed': 'Failed to parse JSON-RPC request.',
-                'checksum.failed': 'Checksum validation failed.'
+                'checksum.failed': 'Checksum validation failed.',
+                'file.deleted': 'File has been moved or deleted'
             },
             'languages': {
                 'English': 'English',

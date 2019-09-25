@@ -154,6 +154,8 @@ Tips: You can use the "noprefix" tag to ignore the prefix, "nosuffix" tag to ign
 Example: ${downspeed:noprefix:nosuffix:scale\=1}=示例: ${downspeed:noprefix:nosuffix:scale\=1}
 Updating Page Title Interval=頁面標題更新間隔
 Enable Browser Notification=啟用瀏覽器通知
+Enable Desktop Notification=啟用桌面通知
+Enable Minimize Notification=啟用最小化通知
 Aria2 RPC Alias=Aria2 RPC 別名
 Aria2 RPC Address=Aria2 RPC 位址
 Aria2 RPC Protocol=Aria2 RPC 協定
@@ -190,7 +192,7 @@ Are you sure you want to import all settings?=您是否要匯入所有設定?
 Invalid settings data format!=無效的設定資料格式!
 Data has been copied to clipboard.=資料已經複製到剪貼簿中.
 Supported Placeholder=支援的預留位置
-AriaNg Title=AriaNg 標題
+AriaNg Title=AriaNg GUI 標題
 Downloading Count=正在下載數量
 Current RPC Alias=目前 RPC 別名
 Waiting Count=正在等待數量
@@ -251,6 +253,7 @@ Tap to configure and get started with AriaNg.=您還沒有進行過設定, 點�
 Cannot initialize WebSocket!=無法初始化 WebSocket!
 Access Denied!=拒絕訪問!
 You cannot use AriaNg because this browser does not meet the minimum requirements for data storage.=您無法使用 AriaNg, 因為此瀏覽器不滿足資料儲存的最低要求.
+Show the file in a file manager=在檔案管理器中顯示檔案
 
 [error]
 unknown=不詳錯誤.
@@ -283,6 +286,7 @@ option.bad=設定錯誤.
 server.overload=遠端伺服器繁忙, 無法處理目前要求.
 rpc.request.parse.failed=處理 RPC 要求失敗.
 checksum.failed=檔案校驗失敗.
+file.deleted=檔案已被移動或刪除
 
 [languages]
 English=英語
