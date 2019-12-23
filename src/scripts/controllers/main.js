@@ -273,12 +273,12 @@
                             }
                         }
                     }, {
-                        textParams: {
-                            successCount: response.successCount,
-                            failedCount: response.failedCount,
-                            skipCount: skipCount
-                        }
-                    });
+                            textParams: {
+                                successCount: response.successCount,
+                                failedCount: response.failedCount,
+                                skipCount: skipCount
+                            }
+                        });
                 }, false);
             }, true);
         };
@@ -440,5 +440,16 @@
         refreshGlobalStat(true, function () {
             refreshPageTitle();
         });
+
+        if (typeof window.PluginsHelper !== "undefined") {
+            window.PluginsHelper.extra.changeAria2Config = function (changedOptions) {
+                Object.keys(changedOptions).forEach(function (key) {
+                    var value = changedOptions[key]
+                    aria2SettingService.setGlobalOption(key, value, function () { }, true);
+                })
+            }
+
+            window.PluginsHelper.emit("ready")
+        }
     }]);
 }());

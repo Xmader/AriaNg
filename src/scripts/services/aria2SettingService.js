@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ariaNg').factory('aria2SettingService', ['ariaNgConstants', 'aria2AllOptions', 'aria2GlobalAvailableOptions', 'aria2QuickSettingsAvailableOptions', 'aria2TaskAvailableOptions', 'aria2RpcService', 'ariaNgLogService', 'ariaNgStorageService', function (ariaNgConstants, aria2AllOptions, aria2GlobalAvailableOptions, aria2QuickSettingsAvailableOptions, aria2TaskAvailableOptions, aria2RpcService, ariaNgLogService, ariaNgStorageService) {
+    angular.module('ariaNg').factory('aria2SettingService', ['ariaNgConstants', 'aria2AllOptions', 'aria2GlobalAvailableOptions', 'aria2QuickSettingsAvailableOptions', 'aria2TaskAvailableOptions', 'aria2RpcService', 'ariaNgLogService', 'ariaNgStorageService', 'ariaNgSettingService', function (ariaNgConstants, aria2AllOptions, aria2GlobalAvailableOptions, aria2QuickSettingsAvailableOptions, aria2TaskAvailableOptions, aria2RpcService, ariaNgLogService, ariaNgStorageService, ariaNgSettingService) {
         var processStatResult = function (stat) {
             if (!stat) {
                 return stat;
@@ -19,6 +19,11 @@
         var getSettingHistoryKey = function (key) {
             return ariaNgConstants.settingHistoryKeyPrefix + '.' + key;
         };
+
+        var isLocalhost = function () {
+            var rpcHost = ariaNgSettingService.getAllRpcSettings()[0].rpcHost
+            return rpcHost === "127.0.0.1" || rpcHost === "localhost" || rpcHost === "::1"
+        }
 
         return {
             isOptionKeyValid: function (key) {
@@ -236,7 +241,15 @@
                 return aria2RpcService.changeGlobalOption({
                     options: data,
                     silent: !!silent,
-                    callback: callback
+                    callback: function (response) {
+                        callback(response)
+
+                        if (response.success && response.data === 'OK') {
+                            if (isLocalhost() && window.PluginsHelper) {
+                                window.PluginsHelper.emit("aria2-config-changed", response.context.options)
+                            }
+                        }
+                    }
                 });
             },
             getAria2Status: function (callback, silent) {
