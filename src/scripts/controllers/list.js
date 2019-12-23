@@ -85,8 +85,8 @@
         };
 
         $scope.show_file = function (path) {
-            if (window.show_file) {
-                window.show_file(path)
+            if (window.PluginsHelper) {
+                window.PluginsHelper.extra.showFile(path)
             }
         }
 
@@ -96,8 +96,8 @@
         }
 
         $scope.file_exists = function (path) {
-            if (window.file_exists) {
-                return window.file_exists(path) ? true : 'deleted'
+            if (window.PluginsHelper) {
+                return window.PluginsHelper.extra.fileExistsSync(path) ? true : 'deleted'
             }
             else {
                 return false

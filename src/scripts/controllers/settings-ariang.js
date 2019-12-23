@@ -330,7 +330,8 @@
         };
 
         $scope.isSupportDesktopNotification = function () {
-            return typeof window.notify === "function"
+            // return typeof window.notify === "function"
+            return typeof window.PluginsHelper !== "undefined"
         };
 
         angular.element('[data-toggle="popover"]').popover();

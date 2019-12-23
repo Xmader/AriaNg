@@ -24,4 +24,12 @@
         tip.innerHTML = 'Sorry, AriaNg cannot support this browser, please upgrade your browser!';
         document.getElementById('content-wrapper').appendChild(tip);
     }
+
+    // 右键菜单
+    if (typeof window.PluginsHelper !== "undefined") {
+        window.addEventListener("contextmenu", function (e) {
+            window.PluginsHelper.emit("contextmenu", e)
+        })
+    }
+
 }());

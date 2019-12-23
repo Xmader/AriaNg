@@ -304,7 +304,17 @@
             return task && task.status === 'error' && task.errorDescription && !task.bittorrent;
         };
 
-        window.aria2TaskService = aria2TaskService
+        // window.aria2TaskService = aria2TaskService
+
+        // 显示任务栏进度条
+        if (typeof window.PluginsHelper !== "undefined") {
+            setInterval(function () {
+                aria2TaskService.getTaskList("downloading", false, function (response) {
+                    var tasks = response.data
+                    window.PluginsHelper.emit("downloading", tasks)
+                })
+            }, 200)
+        }
 
         $rootScope.swipeActions = {
             leftSwipe: function () {

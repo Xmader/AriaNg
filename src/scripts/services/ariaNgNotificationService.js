@@ -81,8 +81,8 @@
                 options.body = content;
 
                 if (isSupportBrowserNotification && ariaNgSettingService.getBrowserNotification()) {
-                    if (window.notify) {
-                        window.notify(title, content);
+                    if (window.PluginsHelper) {
+                        window.PluginsHelper.emit("notify", title, content);
                     }
                     else {
                         showBrowserNotifaction(title, options);

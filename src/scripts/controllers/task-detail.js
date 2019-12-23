@@ -653,8 +653,8 @@
         };
 
         $scope.open_download_dir = function (dir) {
-            if (window.open_download_dir) {
-                window.open_download_dir(dir)
+            if (window.PluginsHelper) {
+                window.PluginsHelper.extra.openDir(dir)
             }
         }
 
@@ -664,8 +664,8 @@
         }
 
         $scope.dir_exists = function (dir) {
-            if (window.file_exists) {
-                return window.file_exists(dir)
+            if (window.PluginsHelper) {
+                window.PluginsHelper.extra.fileExistsSync(dir)
             }
             else {
                 return false

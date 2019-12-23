@@ -26,8 +26,8 @@
         $scope.setGlobalOption = function (key, value, optionStatus) {
             return aria2SettingService.setGlobalOption(key, value, function (response) {
                 if (response.success && response.data === 'OK') {
-                    if (isLocalhost() && window.saveLocalConfig) {
-                        window.saveLocalConfig(response.context.options)
+                    if (isLocalhost() && window.PluginsHelper) {
+                        window.PluginsHelper.emit("aria2-config-changed", response.context.options)
                     }
 
                     optionStatus.setSuccess();
