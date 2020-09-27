@@ -387,6 +387,18 @@
             setRemoveOldTaskAfterRetrying: function (value) {
                 setOption('removeOldTaskAfterRetrying', value);
             },
+            getConfirmTaskRemoval: function () {
+                return getOption('confirmTaskRemoval');
+            },
+            setConfirmTaskRemoval: function (value) {
+                setOption('confirmTaskRemoval', value);
+            },
+            getIncludePrefixWhenCopyingFromTaskDetails: function () {
+                return getOption('includePrefixWhenCopyingFromTaskDetails');
+            },
+            setIncludePrefixWhenCopyingFromTaskDetails: function (value) {
+                setOption('includePrefixWhenCopyingFromTaskDetails', value);
+            },
             getAfterRetryingTask: function () {
                 return getOption('afterRetryingTask');
             },

@@ -32,17 +32,10 @@
                 return;
             }
 
-            var noticicationScope = $rootScope.$new();
-
-            noticicationScope.refreshPage = function () {
-                $window.location.reload();
-            };
-
             lastRefreshPageNotification = ariaNgLocalizationService.notifyInPage('', 'Configuration has been modified, please reload the page for the changes to take effect.', {
                 delay: false,
                 type: 'info',
-                templateUrl: 'setting-changed-notification.html',
-                scope: noticicationScope,
+                templateUrl: 'views/notification-reloadable.html',
                 onClose: function () {
                     lastRefreshPageNotification = null;
                 }
@@ -56,7 +49,7 @@
             languages: ariaNgLanguages,
             titlePreview: getFinalTitle(),
             availableTime: ariaNgCommonService.getTimeOptions([1000, 2000, 3000, 5000, 10000, 30000, 60000], true),
-            trueFalseOptions: [{name: 'True', value: true}, {name: 'False', value: false}],
+            trueFalseOptions: [{name: 'Enabled', value: true}, {name: 'Disabled', value: false}],
             showRpcSecret: false,
             isInsecureProtocolDisabled: ariaNgSettingService.isInsecureProtocolDisabled(),
             settings: ariaNgSettingService.getAllOptions(),
@@ -197,6 +190,14 @@
 
         $scope.setRemoveOldTaskAfterRetrying = function (value) {
             ariaNgSettingService.setRemoveOldTaskAfterRetrying(value);
+        };
+
+        $scope.setConfirmTaskRemoval = function (value) {
+            ariaNgSettingService.setConfirmTaskRemoval(value);
+        };
+
+        $scope.setIncludePrefixWhenCopyingFromTaskDetails = function (value) {
+            ariaNgSettingService.setIncludePrefixWhenCopyingFromTaskDetails(value);
         };
 
         $scope.setAfterRetryingTask = function (value) {
